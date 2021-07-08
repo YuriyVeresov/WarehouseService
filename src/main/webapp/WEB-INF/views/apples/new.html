@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>add apple</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/warehouse}" th:object="${newApple}">
+    <label for="weight">Enter weight:</label>
+    <input xml:space="default" type="text" th:field="*{weight}" id="weight"/>
+    <br/>
+    <label for="color">Enter color:</label>
+    <input type="text" th:field="*{color}" id="color"/>
+    <br/>
+    <label for="grade">Enter grade:</label>
+    <input type="text" th:field="*{grade}" id="grade"/>
+    <br/>
+    <label for="sour">Enter sour:</label>
+    <input type="text" th:field="*{sour}" id="sour"/>
+    <br/>
+    <input type="submit" value="ADD"/>
+</form>
+</body>
+</html>
