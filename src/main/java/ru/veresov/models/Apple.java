@@ -1,22 +1,14 @@
 package ru.veresov.models;
 
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-
 public class Apple {
     private int id;
-    @NotEmpty(message = "Field must not be empty")
-    @Min(value = 0, message = "Weight should not be 0")
     private double weight;
-    @NotEmpty(message = "Field must not be empty")
-    private Colors color;
-    @NotEmpty(message = "Field must not be empty")
+    String color;
     private String grade;
-    @NotEmpty(message = "Field must not be empty")
     private boolean sour;
 
-    public Apple(int id, double weight, Colors color, String grade, boolean sour) {
+
+    public Apple(int id, double weight, String color, String grade, boolean sour) {
         this.id = id;
         this.weight = weight;
         this.color = color;
@@ -44,11 +36,11 @@ public class Apple {
         this.weight = weight;
     }
 
-    public Colors getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Colors color) {
+    public void setColor(String color) {
         this.color = color;
     }
 

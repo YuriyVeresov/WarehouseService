@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <title>apple info</title>
 </head>
-
+<h4>Apple info:</h4>
 <body>
 <p th:text="${apple.toString()}">VALUE</p>
-
 <a th:href="@{/warehouse/{id}/edit(id=${apple.getId()})}">Edit apple</a>
-
 <form th:method="DELETE" th:action="@{/warehouse/{id}(id=${apple.getId()})}">
     <br/>
+    <hr/>
     <input type="submit" value="DELETE"/>
 </form>
 </body>

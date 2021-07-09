@@ -34,30 +34,34 @@ public class ApplesController {
         model.addAttribute("apple", appleDAO.appleInfo(id));
         return "apples/info";
     }
+
     @GetMapping("/new")
-    public String newApple(@ModelAttribute("newApple") Apple apple){
+    public String newApple(@ModelAttribute("newApple") Apple apple) {
         return "apples/new";
     }
+
     @PostMapping()
-    public String createApple(@ModelAttribute("newApple") Apple apple){
+    public String createApple(@ModelAttribute("newApple") Apple apple) {
+
         appleDAO.addApple(apple);
         return "redirect:/warehouse";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id){
+    public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("apple", appleDAO.appleInfo(id));
         return "apples/edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("apple") Apple apple, @PathVariable("id") int id){
+    public String update(@ModelAttribute("apple") Apple apple, @PathVariable("id") int id) {
+
         appleDAO.updateApple(id, apple);
         return "redirect:/warehouse";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id){
+    public String delete(@PathVariable("id") int id) {
         appleDAO.deleteApple(id);
         return "redirect:/warehouse";
     }

@@ -1,56 +1,54 @@
 package ru.veresov.dao;
 
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.veresov.models.Apple;
-import ru.veresov.models.Colors;
 
-import java.util.ArrayList;
 import java.util.List;
-
 
 @Component
 public class AppleDAOImpl implements AppleDAO {
 
-    private static int ID;
-    private List<Apple> appleList;
+    private final JdbcTemplate jdbcTemplate;
 
-    {
-        appleList = new ArrayList<>();
-
-        appleList.add(new Apple(++ID, 0.32, Colors.GREEN, "grade1",true));
-        appleList.add(new Apple(++ID, 0.2, Colors.RED, "grade2",false));
-        appleList.add(new Apple(++ID, 0.223, Colors.YELLOW, "grade3",true));
+    public AppleDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     public List<Apple> start() {
-        return appleList;
+        return jdbcTemplate.query("SELECT * FROM apple", new BeanPropertyRowMapper<>(Apple.class));
     }
-
 
     @Override
     public Apple appleInfo(int id) {
-        return appleList.stream().filter(apple -> apple.getId() == id).findAny().orElse(null);
+        return jdbcTemplate.query("SELECT * FROM apple WHERE id=?",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Apple.class))
+                .stream().findAny()
+                .orElse(null);
     }
 
     @Override
     public void addApple(Apple apple) {
-        apple.setId(++ID);
-        appleList.add(apple);
+        jdbcTemplate.update("INSERT INTO apple(weight, color, grade, sour) VALUES (?,?,?,?)",
+                apple.getWeight(),
+                apple.getColor(),
+                apple.getGrade(),
+                apple.isSour());
     }
 
     @Override
     public void updateApple(int id, Apple apple) {
-        Apple appleToUpdated = appleInfo(id);
-
-        appleToUpdated.setWeight(apple.getWeight());
-        appleToUpdated.setColor(apple.getColor());
-        appleToUpdated.setGrade(apple.getGrade());
-        appleToUpdated.setSour(apple.isSour());
+        jdbcTemplate.update("UPDATE apple SET weight=?, color=?, grade=?, sour=? WHERE id=?",
+                apple.getWeight(),
+                apple.getColor(),
+                apple.getGrade(),
+                apple.isSour(), id);
     }
 
     @Override
     public void deleteApple(int id) {
-        appleList.removeIf(apple -> apple.getId() == id);
+        jdbcTemplate.update("DELETE FROM apple WHERE id=?", id);
     }
 }

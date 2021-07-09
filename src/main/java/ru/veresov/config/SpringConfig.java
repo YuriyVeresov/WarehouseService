@@ -21,7 +21,6 @@ import javax.sql.DataSource;
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
 
-
     private final ApplicationContext applicationContext;
 
     @Autowired
@@ -58,9 +57,9 @@ public class SpringConfig implements WebMvcConfigurer {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/warehouse");
-        dataSource.setUsername("yuriy");
-        dataSource.setPassword("");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/warehouse?stringtype=unspecified");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("postgres");
 
         return dataSource;
     }

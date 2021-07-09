@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Update apple</title>
 </head>
+<h4>Edit apple</h4>
 <body>
 <form th:method="PATCH" th:action="@{/warehouse/{id}(id=${apple.getId()})}" th:object="${apple}">
     <label for="weight">Enter weight:</label>
