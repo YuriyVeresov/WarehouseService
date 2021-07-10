@@ -24,8 +24,9 @@ public class AppleDAOImpl implements AppleDAO {
     @Override
     public Apple appleInfo(int id) {
         return jdbcTemplate.query("SELECT * FROM apple WHERE id=?",
-                new Object[]{id}, new BeanPropertyRowMapper<>(Apple.class))
-                .stream().findAny()
+                new BeanPropertyRowMapper<>(Apple.class), id)
+                .stream()
+                .findAny()
                 .orElse(null);
     }
 
