@@ -1,15 +1,25 @@
 package ru.veresov.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "apple")
 public class Apple {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false, unique = true)
+    private Integer id;
+    @Column(name = "weight", nullable = false)
     private double weight;
+    @Column(name = "color", nullable = false)
     String color;
+    @Column(name = "grade", nullable = false, unique = true)
     private String grade;
+    @Column(name = "sour", nullable = false)
     private boolean sour;
 
 
-    public Apple(int id, double weight, String color, String grade, boolean sour) {
-        this.id = id;
+    public Apple(double weight, String color, String grade, boolean sour) {
         this.weight = weight;
         this.color = color;
         this.grade = grade;
@@ -20,11 +30,11 @@ public class Apple {
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -60,17 +70,4 @@ public class Apple {
         this.sour = sour;
     }
 
-    @Override
-    public String toString() {
-        String yesOrNo;
-        if (sour) yesOrNo = "NO";
-        else yesOrNo = "YES";
-
-        return "Apple " +
-                "id= " + id +
-                " , weight: " + weight +
-                " , color: " + color +
-                " , grade: " + grade +
-                " , sour: " + yesOrNo;
-    }
 }

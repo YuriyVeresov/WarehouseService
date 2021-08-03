@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All apples</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div><h1>Information</h1></div>
+
+    <!--/*@thymesVar id="message" type="ru.veresov.controllers.AppleController"*/-->
+    <div th:if="${message}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+    <div>
+        <table class="table table-bordered shadow">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>GRADE</th>
+                <th>WEIGHT</th>
+                <th>COLOR</th>
+                <th>IS SOUR</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:class="apple">
+                <tr>
+                    <td>[[${apple.id}]]</td>
+                    <td>[[${apple.grade}]]</td>
+                    <td>[[${apple.weight}]]</td>
+                    <td>[[${apple.color}]]</td>
+                    <td>[[${apple.sour}]]</td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
